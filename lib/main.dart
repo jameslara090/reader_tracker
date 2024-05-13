@@ -31,6 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int  _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,12 +42,23 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [Text("Hello")],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: <BottomNavigationBarItem> [
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: <BottomNavigationBarItem> [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(icon: Icon(Icons.save), label: 'Saved'),
         BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
+      ],
+      selectedItemColor: Theme.of(context).colorScheme.onPrimary,
+      unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
+      onTap:(value) {
+        print('Tapped: $value');
+        setState(() {
+          _currentIndex = value;
+        });
 
-      ],),
+      },
+      ),
     );
   }
 }
